@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import Subject, Student, Department, SubjectMarks
+from django.core.paginator import Paginator
+
 # Create your views here.
 def show_student_list(request):
     query = Student.objects.all()
-    return render(request, 'student_list.html', context={'query':query,'page_title': "Student list"})
+    
+    paginator = Paginator(query, 15)  # Show 15 contacts per page.
+
+    page_number = request.GET.get("page", 1)
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'student_list.html', context={'query':page_obj,'page_title': "Student list"})
 def add_student(request):
     if request.method == "POST":
         data = request.POST
@@ -37,7 +44,7 @@ def recover_stu(request, id):
     return redirect("/deleted_stu_list/")
 
 def delete_per_stu(request, id):
-    Student.objects.get(student_id=id).delete()
+    Student.admin_objects.get(student_id=id).delete()
     return redirect("/")
 
 def delete_stu(request, id):
@@ -71,4 +78,9 @@ def subject(request):
                 print("This subject exist")
             return redirect("/subject/")
     query = Subject.objects.all()
-    return render(request, 'subject.html', context={'query':query,'page_title': "Subject"})
+        
+    paginator = Paginator(query, 5)  # Show 15 contacts per page.
+
+    page_number = request.GET.get("page", 1)
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'subject.html', context={'query':page_obj,'page_title': "Subject"})

@@ -34,7 +34,23 @@
     </tr>
     {% endfor%}
 
- 
 </tbody>
 </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if query.has_previous %}
+      <li class="page-item"><a class="page-link"  href="?page=1"> first - 1</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{ query.previous_page_number }}">previous</a></li>
+      {% endif %}
+      <li class="page-item"><span class="page-link">{{ query.number }}</span> </li>
+      <!-- <span class="current">
+                Page {{ query.number }} of {{ query.paginator.num_pages }}.
+      </span> -->
+      {% if query.has_next %}
+      <li class="page-item"><a class="page-link"  href="?page={{ query.next_page_number }}">next</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{ query.paginator.num_pages }}">last - {{ query.paginator.num_pages }} </a></li>
+      {% endif %}
+    </ul>
+  </nav>
 {% endblock %}

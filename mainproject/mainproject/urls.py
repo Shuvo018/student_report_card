@@ -25,8 +25,9 @@ urlpatterns = [
     path('student_mark/', student_mark, name="student_mark"),
     path('subject/', subject, name="subject"),
     path('department/', department, name="department"),
-    path('delete_per_stu/<id>', delete_per_stu, name='delete_per_stu'),
     path('delete_stu/<id>', delete_stu, name='delete_stu'),
     path("deleted_stu_list/",deleted_stu_list, name="deleted_stu_list"),
     path("deleted_stu_list/recover_stu/<id>",recover_stu, name="recover_stu"),
+    path('deleted_stu_list/delete_per_stu/<id>', delete_per_stu, name='delete_per_stu'),
+
 ]
