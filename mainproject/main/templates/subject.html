@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container m-5 border border-dark">
+
+    <form class="m-5" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <h2>Add subject</h2>
+        <div class="mb-3">
+            <label for="" class="form-label">Subject: </label><br>
+            <input type="text" name="subject" id="" aria-describedby="">
+        </div>
+    <button type="submit" class="btn btn-primary">ADD</button>
+
+    </form>
+</div>
+<hr>
+<h1>Subject list</h1>
+<hr>
+<table class="table m-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Subject Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sub in query %}
+    <tr>
+      <th scope="row">{{ forloop.counter}}</th>
+      <td>
+          {{ sub.subject_name }}
+      </td>
+    </tr>
+    {% endfor%}
+
+ 
+</tbody>
+</table>
+{% endblock %}

@@ -1,9 +1,47 @@
 {% extends "base.html" %}
 {% block start %}
 
-
     <div class="d-flex">
-        <a  class="btn btn-outline-success" href="add_student">Add student</a>
+        <a  class="btn btn-outline-success m-5" href="add_student">Add student</a>
+        <a  class="btn btn-outline-success  m-5" href="department/">department</a>
+        <a  class="btn btn-outline-success  m-5" href="subject/">subject</a>
     </div>
 
+    <hr>
+    <h1>student list</h1>
+    <hr>
+    <table class="table m-3">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">department</th>
+        <th scope="col">student_id</th>
+        <th scope="col">student_name</th>
+        <th scope="col">student_email</th>
+        <th scope="col">student_age</th>
+        <th scope="col">student_address</th>
+        <th scope="col">is_deleted</th>
+        <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for q in query %}
+        <tr>
+        <th scope="row">{{ forloop.counter}}</th>
+        <td>{{ q.department }}</td>
+        <td>{{ q.student_id }}</td>
+        <td>{{ q.student_name }}</td>
+        <td>{{ q.student_email }}</td>
+        <td>{{ q.student_age }}</td>
+        <td>{{ q.student_address }}</td>
+        {% if q.is_deleted %}
+        <td class="text-danger">deleted</td>
+        {% else %}
+        <td class="text-success">exist</td>
+        {% endif %}
+        <td><a class="btn btn-danger" href="delete_stu/{{ q.student_id }}"> Delete </a></td>
+        </tr>
+        {% endfor%}
+
+ 
 {% endblock %}

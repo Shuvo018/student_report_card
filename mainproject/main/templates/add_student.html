@@ -1,7 +1,39 @@
 {% extends "base.html" %}
 {% block start %}
 
+<div class="container m-5 border border-dark">
 
-    <h1>add student</h1>
+    <form class="m-5" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <h2>Add student</h2>
+
+        <div class="mb-3">
+            <label for="" class="form-label">department: </label><br>
+            <input type="text" name="department" id="" aria-describedby="" required>
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">student_id: </label><br>
+            <input type="text" name="student_id" id="" aria-describedby="">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">student_name: </label><br>
+            <input type="text" name="student_name" id="" aria-describedby="">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">student_email: </label><br>
+            <input type="text" name="student_email" id="" aria-describedby="">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">student_age: </label><br>
+            <input type="text" name="student_age" id="" aria-describedby="">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">student_address: </label><br>
+            <input type="text" name="student_address" id="" aria-describedby="">
+        </div>
+    <button type="submit" class="btn btn-primary">ADD</button>
+
+    </form>
+</div>
 
 {% endblock %}
