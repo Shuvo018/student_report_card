@@ -28,7 +28,9 @@ def add_student(request):
     return render(request, 'add_student.html', context={'page_title': "Add student"})
 
 def delete_stu(request, id):
+    print(id)
     Student.objects.get(student_id=id).delete()
+    return redirect("/")
 
 def student_mark(request):
     return render(request, 'student_mark.html')
