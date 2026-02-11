@@ -27,9 +27,21 @@ def add_student(request):
         return redirect("/")
     return render(request, 'add_student.html', context={'page_title': "Add student"})
 
-def delete_stu(request, id):
-    print(id)
+def deleted_stu_list(request):
+    query = Student.admin_objects.filter(is_deleted=True)
+    return render(request, "deleted_student.html",  context={'query':query,'page_title': "deleted_stu_list"})
+
+def recover_stu(request, id):
+    Student.admin_objects.filter(student_id=id).update(is_deleted=False)
+    print('recover successfully')
+    return redirect("/deleted_stu_list/")
+
+def delete_per_stu(request, id):
     Student.objects.get(student_id=id).delete()
+    return redirect("/")
+
+def delete_stu(request, id):
+    Student.objects.filter(student_id=id).update(is_deleted=True)
     return redirect("/")
 
 def student_mark(request):
@@ -47,6 +59,7 @@ def department(request):
             return redirect("/department/")
     query = Department.objects.all()
     return render(request, 'department.html', context={'query':query,'page_title': "Department"})
+
 def subject(request):
     if request.method == "POST":
         data = request.POST
