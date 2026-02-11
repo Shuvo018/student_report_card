@@ -22,4 +22,5 @@ urlpatterns = [
     path('', show_student_list, name="show_student_list"),
     path('add_student/', add_student, name="add_student"),
     path('student_mark/', student_mark, name="student_mark")
+    
 ]
