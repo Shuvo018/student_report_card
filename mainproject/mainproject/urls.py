@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import show_student_list, add_student, student_mark, subject, delete_stu, department, delete_per_stu, deleted_stu_list, recover_stu
-
+from main.views import get_student_marks
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', show_student_list, name="show_student_list"),
@@ -25,9 +25,9 @@ urlpatterns = [
     path('student_mark/', student_mark, name="student_mark"),
     path('subject/', subject, name="subject"),
     path('department/', department, name="department"),
-    path('delete_stu/<id>', delete_stu, name='delete_stu'),
+    path('delete_stu/<id>/', delete_stu, name='delete_stu'),
     path("deleted_stu_list/",deleted_stu_list, name="deleted_stu_list"),
-    path("deleted_stu_list/recover_stu/<id>",recover_stu, name="recover_stu"),
-    path('deleted_stu_list/delete_per_stu/<id>', delete_per_stu, name='delete_per_stu'),
-
+    path("deleted_stu_list/recover_stu/<id>/",recover_stu, name="recover_stu"),
+    path('deleted_stu_list/delete_per_stu/<id>/', delete_per_stu, name='delete_per_stu'),
+    path("student_marks/<id>/", get_student_marks, name="get_student_marks"),
 ]

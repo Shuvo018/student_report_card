@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Subject, Student, Department, SubjectMarks
+from .models import Subject, Student, Department, SubjectMarks, ReportCard
 from django.core.paginator import Paginator
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Sum
+# from main.seed import generate_report_card
+
 # Create your views here.
 def show_student_list(request):
     query = Student.objects.all()
@@ -104,7 +106,18 @@ def subject(request):
     query = Subject.objects.all()
         
     paginator = Paginator(query, 5)  # Show 15 contacts per page.
-
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     return render(request, 'subject.html', context={'query':page_obj,'page_title': "Subject"})
+
+def get_student_marks(request, id):
+    # generate_report_card()
+    query = None
+    try:
+        query = SubjectMarks.objects.filter(student__student_id=id)
+        total_marks = query.aggregate(total=Sum('marks'))
+    except Exception as e:
+        print(f"{e}")
+    
+ 
+    return render(request, "student_marks.html", context={"total_marks": total_marks, 'query':query, 'page_title': "student marks"})

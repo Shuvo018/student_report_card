@@ -45,7 +45,7 @@
         <tr>
         <th scope="row">{{ forloop.counter}}</th>
         <td>{{ q.department }}</td>
-        <td>{{ q.student_id }}</td>
+        <td><a href="{% url 'get_student_marks' q.student_id %}">{{ q.student_id }}</a></td>
         <td>{{ q.student_name }}</td>
         <td>{{ q.student_email }}</td>
         <td>{{ q.student_age }}</td>

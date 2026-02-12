@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+<div  class="contain m-5">
+  <h4> Name: {{ query.first.student.student_name }}</h4>
+    <h4>Rank: {{ query.first.student.reportcard.first.student_rank}}</h4>
+    <h4>Total Marks: {{total_marks.total}}</h4>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student id</th>
+        <th scope="col">Student subject</th>
+        <th scope="col"> student mark</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for q in query %}
+      <tr>
+        <th scope="row">{{ forloop.counter}}</th>
+        <td>{{ q.student.student_id }}</td>
+        <td>{{ q.subject.subject_name }}</td>
+        <td>{{ q.marks }}</td>
+      </tr>
+      {% endfor%}
+
+
+  </tbody>
+  </table>
+
+</div>
+
+  <!-- <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if query.has_previous %}
+      <li class="page-item"><a class="page-link"  href="?page=1"> first - 1</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{ query.previous_page_number }}">previous</a></li>
+      {% endif %}
+      <li class="page-item"><span class="page-link">{{ query.number }}</span> </li>
+       <span class="current">
+                Page {{ query.number }} of {{ query.paginator.num_pages }}.
+      </span> -->
+      <!-- {% if query.has_next %}
+      <li class="page-item"><a class="page-link"  href="?page={{ query.next_page_number }}">next</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{ query.paginator.num_pages }}">last - {{ query.paginator.num_pages }} </a></li>
+      {% endif %}
+    </ul> -->
+  <!-- </nav> --> 
+
+</div>
+ 
+{% endblock %}
