@@ -45,6 +45,7 @@ def recover_stu(request, id):
 
 def delete_per_stu(request, id):
     Student.admin_objects.get(student_id=id).delete()
+    print("student delete permanently")
     return redirect("/")
 
 def delete_stu(request, id):
