@@ -16,6 +16,13 @@
       {% endfor %}
   </ul>
 {% endif %}
+  <div class="contain m-5">
+    <form method="get" class="d-flex mb-3">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ request.GET.search }}">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+
     <hr>
     <h1>student list</h1>
     <hr>

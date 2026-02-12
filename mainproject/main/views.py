@@ -2,11 +2,19 @@ from django.shortcuts import render, redirect
 from .models import Subject, Student, Department, SubjectMarks
 from django.core.paginator import Paginator
 from django.contrib import messages
-
+from django.db.models import Q
 # Create your views here.
 def show_student_list(request):
     query = Student.objects.all()
-    
+    if request.GET.get('search') is not None:
+        search_query = request.GET.get('search')
+        query = Student.objects.filter(
+            Q(student_name__icontains=search_query) |
+            Q(department__department__icontains=search_query) |
+            Q(student_id__icontains=search_query) |
+            Q(student_email__icontains=search_query) |
+            Q(student_age__icontains=search_query)
+        )
     paginator = Paginator(query, 15)  # Show 15 contacts per page.
 
     page_number = request.GET.get("page", 1)
