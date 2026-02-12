@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Subject, Student, Department, SubjectMarks
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 def show_student_list(request):
@@ -11,6 +12,7 @@ def show_student_list(request):
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     return render(request, 'student_list.html', context={'query':page_obj,'page_title': "Student list"})
+
 def add_student(request):
     if request.method == "POST":
         data = request.POST
@@ -39,17 +41,27 @@ def deleted_stu_list(request):
     return render(request, "deleted_student.html",  context={'query':query,'page_title': "deleted_stu_list"})
 
 def recover_stu(request, id):
-    Student.admin_objects.filter(student_id=id).update(is_deleted=False)
-    print('recover successfully')
+    try:
+        Student.admin_objects.filter(student_id=id).update(is_deleted=False)
+        messages.success(request, "recover successfully.")
+    except Exception as e:
+        messages.error(request, f"{e}")
     return redirect("/deleted_stu_list/")
 
 def delete_per_stu(request, id):
-    Student.admin_objects.get(student_id=id).delete()
-    print("student delete permanently")
+    try:
+        Student.admin_objects.get(student_id=id).delete()
+        messages.success(request, "Student delete permanently.")
+    except Exception as e:
+        messages.error(request, f"{e}")
     return redirect("/")
 
 def delete_stu(request, id):
-    Student.objects.filter(student_id=id).update(is_deleted=True)
+    try:
+        Student.objects.filter(student_id=id).update(is_deleted=True)
+        messages.success(request, "Student deleted successfully.")
+    except Exception as e:
+        messages.error(request, f"{e}")
     return redirect("/")
 
 def student_mark(request):
@@ -69,14 +81,17 @@ def department(request):
     return render(request, 'department.html', context={'query':query,'page_title': "Department"})
 
 def subject(request):
+    
     if request.method == "POST":
+        # Add new subject
         data = request.POST
         if data['subject'] is not None:
             try:
                 Subject.objects.create(subject_name=data['subject'])
-                print("subjected added successfully")
+                messages.success(request, "subjected added successfully.")
             except Exception as e:
-                print("This subject exist")
+                # print("This subject exist")
+                messages.error(request, f"{e}")
             return redirect("/subject/")
     query = Subject.objects.all()
         

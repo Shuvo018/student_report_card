@@ -11,8 +11,14 @@
             <input type="text" name="subject" id="" aria-describedby="">
         </div>
     <button type="submit" class="btn btn-primary">ADD</button>
-
     </form>
+    {% if messages %}
+  <ul class="messages list-unstyled">
+      {% for message in messages %}
+      <li{% if message.tags %} class="alert alert-primary {{ message.tags }}" role="alert"{% endif %} >{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %}
 </div>
 <hr>
 <h1>Subject list</h1>

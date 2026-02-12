@@ -8,6 +8,14 @@
         <a  class="btn btn-outline-success  m-5" href="subject/">subject</a>
     </div>
 
+  <div class="contain m-5">
+      {% if messages %}
+  <ul class="messages list-unstyled">
+      {% for message in messages %}
+      <li{% if message.tags %} class="alert alert-primary {{ message.tags }}" role="alert"{% endif %} >{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %}
     <hr>
     <h1>student list</h1>
     <hr>
@@ -62,6 +70,6 @@
       {% endif %}
     </ul>
   </nav>
-
+</div>
  
 {% endblock %}
