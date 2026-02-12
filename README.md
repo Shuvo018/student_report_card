@@ -11,3 +11,11 @@
   <li>Delete student</li>
   <li>Restore deleted student</li>
 </ol>
+
+<h2>Django keypoints :</h2>
+<ol>
+  <li>Aggregation</li>
+  <li>Paginator</li>
+  <li>messages</li>
+  <li>Models Relation</li>
+</ol>
